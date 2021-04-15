@@ -1,7 +1,6 @@
 <template>
   <div id="app">
-    <h1>黑马后台发布管理系统</h1>
-    <!-- 路由出口 -->
+    <!-- 一级路由出口必须要有 -->
     <router-view/>
   </div>
 </template>
@@ -11,24 +10,4 @@ export default {
 }
 </script>
 <style lang="less">
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-}
-
-#nav {
-  padding: 30px;
-
-  a {
-    font-weight: bold;
-    color: #2c3e50;
-
-    &.router-link-exact-active {
-      color: #42b983;
-    }
-  }
-}
 </style>

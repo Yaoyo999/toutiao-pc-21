@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    <style>
+        .container {
+            background-color: yellow;
+            display: flex;
+            flex-direction: row;
+            height: 121px;
+            /* position: fixed;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            top: 0; */
+        }
+        .container2 {
+            display: flex;
+            flex-direction: column;
+            flex: 1;
+        }
+        .one {
+            background-color: red;
+            width: 200px;
+        }
+        .two {
+            background-color: pink;
+            /* height: 60px; */
+        }
+        .three {
+            flex: 1;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="one">1</div>
+        <div class="container2">
+            <div class="two">2</div>
+            <div class="three">3</div>
+        </div>
+    </div>
+</body>
+</html>
