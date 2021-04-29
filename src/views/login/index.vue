@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       user: {
-        mobile: '', // 用户名
+        mobile: '13911111111', // 用户名
         code: '246810' // 验证码
       },
       checked: false,
