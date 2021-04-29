@@ -1,12 +1,18 @@
 <template>
   <el-container class="layout-container">
-    <el-aside width="200px" class="aside">
-      <app-nav></app-nav>
+    <el-aside :width="collapse ? 'auto' : '180px'" class="aside">
+      <app-nav :collapse="collapse"></app-nav>
     </el-aside>
     <el-container>
       <el-header class="header">
         <div>
-          <i class="el-icon-s-fold"></i>
+          <i
+          :class="{
+            'el-icon-s-fold': collapse,
+            'el-icon-s-unfold':!collapse
+          }"
+          @click="collapse = !collapse"
+          ></i>
           <span>江苏传智播客科技教育有限公司</span>
         </div>
         <el-dropdown>
@@ -17,7 +23,7 @@
         </div>
           <el-dropdown-menu slot="dropdown">
             <el-dropdown-item>个人设置</el-dropdown-item>
-            <el-dropdown-item>退出</el-dropdown-item>
+            <el-dropdown-item @click.native="logOut">退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </el-header>
@@ -32,6 +38,7 @@
 <script>
 import appNav from './conponents/appNav'
 import { userProfile } from '@/api/user'
+import global from '@/utils/global-bus'
 export default {
   name: 'layoutIndex',
   components: {
@@ -40,7 +47,8 @@ export default {
   props: {},
   data () {
     return {
-      user: {} // 当前登录对象
+      user: {}, // 当前登录对象
+      collapse: false // 是否菜单栏折叠，默认不折叠
     }
   },
   computed: {},
@@ -48,12 +56,33 @@ export default {
   created () {
     // 初始化完成就发送请求调用
     this.loadUserProfile()
+    global.$on('updateUser', (data) => {
+      // 注意这里不是直接将data 赋值给user 因为是对象，引用数据类型
+      // 如果直接传递会使数据同步，造成数据污染
+      this.user.photo = data.photo
+      this.user.name = data.name
+      // console.log(data)
+    })
   },
   mounted () {},
   methods: {
+    // 获取用户信息
     loadUserProfile () {
       userProfile().then(res => {
         this.user = res.data.data
+      })
+    },
+    // 退出登录
+    logOut () {
+      this.$confirm('确定要退出登录吗', '退出提示', {
+        confirmButtonText: '确定',
+        cancelButtonText: '取消',
+        type: 'waring'
+      }).then(() => {
+        // 清除用户登录信息
+        window.localStorage.removeItem('user')
+        // 退出登录，退回到登录界面
+        this.$router.replace('/login')
       })
     }
   }
@@ -80,7 +109,7 @@ export default {
   align-items: center;
   justify-content: space-between;
   border-bottom: 1px solid #ccc;
-  .el-icon-s-fold {
+  .el-icon-s-fold,.el-icon-s-unfold {
       margin-right: 4px;
   }
   .avatar-wrap{

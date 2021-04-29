@@ -28,7 +28,7 @@ export default {
   data () {
     return {
       user: {
-        mobile: '17090086870', // 用户名
+        mobile: '', // 用户名
         code: '246810' // 验证码
       },
       checked: false,
@@ -70,10 +70,12 @@ export default {
             message: '登录成功',
             type: 'success'
           })
+          // 将用户的token存储到本地
+          window.localStorage.setItem('user', JSON.stringify(res.data.data))
           this.loginLoading = false
           // 跳转到主页(两种写法都可以)
           // this.$router.push('/')
-          this.$router.push({
+          this.$router.replace({
             name: 'home'
           })
         }).catch(err => {
@@ -131,4 +133,5 @@ export default {
         letter-spacing: 1px;
     }
 }
+// eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzI1NiJ9.eyJleHAiOjE2MTg5MDkxMjYsInVzZXJfaWQiOjEsInJlZnJlc2giOmZhbHNlLCJ2ZXJpZmllZCI6dHJ1ZX0.EdKErKDqMc3snkYxqt02jSa8t9G44002yWKY3CMOMJg
 </style>

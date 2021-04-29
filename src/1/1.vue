@@ -1,16 +1,11 @@
 <template>
-  <div class="home-container">
-    <el-card class="box-card">
-  <div slot="header" class="clearfix">
-   首页
-  </div>
-  <img src="http://toutiao-img.itheima.net/Fqn4YqWwsgHMkVMF6-clzFHBdKoT" alt="">
-</el-card>
+  <div class="container">
   </div>
 </template>
+
 <script>
 export default {
-  name: 'homeIndex',
+  name: '',
   components: {},
   props: {},
   data () {
